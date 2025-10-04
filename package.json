@@ -2,6 +2,7 @@
   "name": "talrn-clone",
   "version": "1.0.0",
   "private": true,
+  "homepage": "./",
   "engines": {
     "node": "22.x",
     "npm": "10.x"
