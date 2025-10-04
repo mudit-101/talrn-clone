@@ -14,10 +14,10 @@ export default function OTPVerify() {
     setError("");
 
     try {
-      const res = await axios.post("http://localhost:5000/verify-otp", {
-        email,
-        otp,
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/verify-otp`, // ✅ uses env variable
+        { email, otp }
+      );
 
       if (res.data.success) {
         alert("OTP verified successfully!");
