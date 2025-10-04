@@ -4,7 +4,19 @@ const nodemailer = require("nodemailer");
 require("dotenv").config(); // ✅ Load .env variables
 
 const app = express();
-app.use(cors());
+
+// ✅ FIX: Explicitly allow your frontend origin
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000", // for local testing
+      "https://talrn-clone-liard.vercel.app", // your Vercel frontend URL
+    ],
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 // ✅ Temporary in-memory OTP store with expiry
@@ -25,7 +37,6 @@ app.post("/login", async (req, res) => {
   otpStore[email] = { otp, expiresAt: Date.now() + 5 * 60 * 1000 }; // 5 min expiry
 
   try {
-    // ✅ Use Gmail credentials from .env
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -72,6 +83,6 @@ app.post("/verify-otp", (req, res) => {
   res.status(400).json({ success: false, message: "Invalid OTP" });
 });
 
-// ✅ Start server (use PORT from .env or default to 5000)
+// ✅ Start server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
