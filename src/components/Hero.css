@@ -1,0 +1,17 @@
+.hero {
+  text-align: center;
+  padding: 50px;
+}
+.hero-text h1 {
+  font-size: 2rem;
+}
+.email-box {
+  margin: 20px 0;
+}
+.email-box input {
+  padding: 10px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-right: 10px;
+}

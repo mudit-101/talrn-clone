@@ -1,0 +1,171 @@
+/* .form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background: #f8faff;
+}
+
+.verify-box {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  text-align: center;
+}
+
+.verify-box h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #222;
+}
+
+.verify-box p {
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+.verify-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 15px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.verify-box button {
+  width: 100%;
+  padding: 12px;
+  background: #4a6cf7;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.verify-box button:hover {
+  background: #3652c9;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.resend {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.resend a {
+  color: #4a6cf7;
+  text-decoration: none;
+}
+
+.resend a:hover {
+  text-decoration: underline;
+} */
+
+/* Container */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f8faff;
+  padding: 20px;
+}
+
+/* OTP Box */
+.verify-box {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.06);
+  text-align: center;
+}
+
+/* Title */
+.verify-box h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #222;
+}
+
+/* Info */
+.verify-box p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Input */
+.verify-box input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  text-align: center;
+  outline: none;
+  letter-spacing: 2px;
+}
+
+.verify-box input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+/* Button */
+.verify-box .btn-primary {
+  width: 100%;
+  background: #4f46e5;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.verify-box .btn-primary:hover {
+  background: #4338ca;
+}
+
+/* Error message */
+.error {
+  margin-top: 10px;
+  color: red;
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .verify-box {
+    padding: 20px;
+  }
+
+  .verify-box h2 {
+    font-size: 18px;
+  }
+
+  .verify-box input,
+  .verify-box .btn-primary {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
