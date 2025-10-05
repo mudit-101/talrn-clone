@@ -13,7 +13,8 @@ app.use(
       "http://localhost:3000", // Local React dev port
       "http://localhost:5001", // If your React runs on 5001
       "https://talrn-clone-liard.vercel.app", // Vercel frontend
-      "https://talrn-clone-zeta.vercel.app", // ✅ Added missing origin
+      "https://talrn-clone-zeta.vercel.app", 
+      "https://talrn-clone-phi.vercel.app"// ✅ Added missing origin
     ],
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
