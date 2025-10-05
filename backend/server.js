@@ -1,21 +1,26 @@
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
-require("dotenv").config(); // ✅ Load .env variables
+require("dotenv").config(); // Load .env variables
 
 const app = express();
 
-// ✅ FIX: Explicitly allow your frontend origin
+// ✅ FIXED CORS CONFIG
 app.use(
   cors({
     origin: [
-      "http://localhost:3000", // for local testing
-      "https://talrn-clone-liard.vercel.app", // your Vercel frontend URL
+      "http://localhost:3000", // Local React dev port
+      "http://localhost:5001", // If your React runs on 5001
+      "https://talrn-clone-liard.vercel.app", // Your deployed Vercel frontend
     ],
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
+
+// Handle preflight OPTIONS requests
+app.options("*", cors());
 
 app.use(express.json());
 
@@ -30,7 +35,9 @@ app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ success: false, message: "Email & Password required" });
+    return res
+      .status(400)
+      .json({ success: false, message: "Email & Password required" });
   }
 
   const otp = generateOtp();
@@ -40,8 +47,8 @@ app.post("/login", async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: process.env.EMAIL_USER, // from .env
+        pass: process.env.EMAIL_PASS, // from .env (App password)
       },
     });
 
@@ -65,7 +72,9 @@ app.post("/verify-otp", (req, res) => {
   const { email, otp } = req.body;
 
   if (!otpStore[email]) {
-    return res.status(400).json({ success: false, message: "OTP not found or expired" });
+    return res
+      .status(400)
+      .json({ success: false, message: "OTP not found or expired" });
   }
 
   const { otp: storedOtp, expiresAt } = otpStore[email];

@@ -8,22 +8,34 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  // ✅ Use backend URL from env OR fallback to localhost for dev
+  const API_BASE_URL =
+    process.env.REACT_APP_API_URL || "http://localhost:5000";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/login`, { email, password });
-
+      const res = await axios.post(
+        `${API_BASE_URL}/login`,
+        { email, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, // ✅ Needed when backend uses CORS credentials
+        }
+      );
 
       if (res.data.success) {
         localStorage.setItem("userEmail", email);
-        alert("OTP sent to your email!");
+        alert("✅ OTP sent to your email!");
         navigate("/verify");
       } else {
-        alert(res.data.message || "Failed to send OTP");
+        alert(res.data.message || "❌ Failed to send OTP");
       }
     } catch (err) {
-      console.error("Error during login:", err);
-      alert("Something went wrong! Check if your server is running on port 5000.");
+      console.error("❌ Error during login:", err);
+      alert("Something went wrong! Check your backend or network connection.");
     }
   };
 
@@ -51,13 +63,14 @@ export default function Login() {
         <button type="submit">Continue</button>
 
         <p className="forgot">Forgot password?</p>
-        
+
         <div className="extra-links">
           <p>
             Don’t have an account? <a href="/join">Sign up</a>
           </p>
           <p>
-            Please <a href="/contact">Contact us</a> if you require any assistance
+            Please <a href="/contact">Contact us</a> if you require any
+            assistance
           </p>
         </div>
       </form>
